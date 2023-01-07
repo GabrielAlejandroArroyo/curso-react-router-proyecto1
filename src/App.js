@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+
+import { Menu } from './Menu'
+
+import { HomePage } from './HomePage'
+import { BlogPage } from './BlogPage'
+import { ProfilePage } from './ProfilePage'
+
+
+// La ruta empieza en /#/ --- Home
+// La ruta empieza en /#/blog --- Blog
+// La ruta empieza en /#/profile --- Profile
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* Provider de tipo HashRouter */}
+      <HashRouter>
+        <Menu />
+
+        {/* Parte dinamica con Routes */}
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/blog' element={<BlogPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
+          {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
+          <Route path='*' element={<p>Not found</p>} />
+
+        </Routes>
+
+        <footer></footer>
+      </HashRouter>
+    </>
+
   );
 }
 
