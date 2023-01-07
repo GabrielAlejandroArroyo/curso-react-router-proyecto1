@@ -22,9 +22,17 @@ function App() {
         {/* Parte dinamica con Routes */}
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/blog' element={<BlogPage />} />
-          <Route path='/blog/:slug' element={<BlogPost />} />
+
+
+          {/* Nested Route */}
+          <Route path='/blog' element={<BlogPage />} >
+            {/* <Route path='/blog/:slug' element={<BlogPost />} /> */}
+            {/* Como es nested */}
+            <Route path=':slug' element={<BlogPost />} />
+          </Route>
+
           <Route path='/profile' element={<ProfilePage />} />
+
           {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
           <Route path='*' element={<p>Not found</p>} />
 
