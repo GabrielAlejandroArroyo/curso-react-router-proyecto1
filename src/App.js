@@ -1,10 +1,11 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
-import { Menu } from './Menu'
+import { Menu } from './Menu';
 
-import { HomePage } from './HomePage'
-import { BlogPage } from './BlogPage'
-import { ProfilePage } from './ProfilePage'
+import { HomePage } from './HomePage';
+import { BlogPost } from './BlogPost';
+import { BlogPage } from './BlogPage';
+import { ProfilePage } from './ProfilePage';
 
 
 // La ruta empieza en /#/ --- Home
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/blog' element={<BlogPage />} />
+          <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/profile' element={<ProfilePage />} />
           {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
           <Route path='*' element={<p>Not found</p>} />
