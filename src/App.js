@@ -2,10 +2,16 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { Menu } from './Menu';
 
+import { AuthProvider } from './auth'
+
 import { HomePage } from './HomePage';
 import { BlogPost } from './BlogPost';
 import { BlogPage } from './BlogPage';
 import { ProfilePage } from './ProfilePage';
+import { LoginPage } from './LoginPage';
+import { LogoutPage } from './LogoutPage';
+
+
 
 
 // La ruta empieza en /#/ --- Home
@@ -17,28 +23,32 @@ function App() {
     <>
       {/* Provider de tipo HashRouter */}
       <HashRouter>
-        <Menu />
+        <AuthProvider>
+          <Menu />
 
-        {/* Parte dinamica con Routes */}
-        <Routes>
-          <Route path='/' element={<HomePage />} />
+          {/* Parte dinamica con Routes */}
+          <Routes>
+            <Route path='/' element={<HomePage />} />
 
 
-          {/* Nested Route */}
-          <Route path='/blog' element={<BlogPage />} >
-            {/* <Route path='/blog/:slug' element={<BlogPost />} /> */}
-            {/* Como es nested */}
-            <Route path=':slug' element={<BlogPost />} />
-          </Route>
+            {/* Nested Route */}
+            <Route path='/blog' element={<BlogPage />} >
+              {/* <Route path='/blog/:slug' element={<BlogPost />} /> */}
+              {/* Como es nested */}
+              <Route path=':slug' element={<BlogPost />} />
+            </Route>
 
-          <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/logout' element={<LogoutPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
 
-          {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
-          <Route path='*' element={<p>Not found</p>} />
+            {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
+            <Route path='*' element={<p>Not found</p>} />
 
-        </Routes>
+          </Routes>
 
-        <footer></footer>
+          <footer></footer>
+        </AuthProvider>
       </HashRouter>
     </>
 
