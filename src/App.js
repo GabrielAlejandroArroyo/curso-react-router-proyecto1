@@ -2,7 +2,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { Menu } from './Menu';
 
-import { AuthProvider } from './auth'
+import { AuthProvider, AuthRoute } from './auth'
 
 import { HomePage } from './HomePage';
 import { BlogPost } from './BlogPost';
@@ -39,8 +39,21 @@ function App() {
             </Route>
 
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/logout' element={<LogoutPage />} />
-            <Route path='/profile' element={<ProfilePage />} />
+            <Route
+              path='/logout'
+              element={
+                <AuthRoute>
+                  <LogoutPage />
+                </AuthRoute>
+              } />
+            <Route
+              path='/profile'
+              element={
+                <AuthRoute>
+                  <ProfilePage />
+                </AuthRoute>
+
+              } />
 
             {/* Debe ir al final para que muestre todas las rutas que no encuentra */}
             <Route path='*' element={<p>Not found</p>} />
