@@ -1,10 +1,14 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from './auth';
 import { blogdata } from './blogdata'
 
 function BlogPost() {
     const navigate = useNavigate();
     const { slug } = useParams();
+
+
+    const auth = useAuth();
 
 
     const blogpost = blogdata.find(post => post.slug === slug);
@@ -22,6 +26,10 @@ function BlogPost() {
             <button onClick={returnToBlog}>volver al blog</button>
             <p>{blogpost.author}</p>
             <p>{blogpost.content}</p>
+
+            {auth.user?.isAdmin && (
+                <button>Eliminar blogpost</button>
+            )}
         </>
     );
 }
